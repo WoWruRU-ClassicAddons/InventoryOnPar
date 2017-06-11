@@ -182,7 +182,7 @@
 			</OnClick>
 			<OnEnter>
 				GameTooltip:SetOwner(this, "ANCHOR_CURSOR");
-				GameTooltip:SetText("Left click to show the current players kit. Right click to delete the current player from the table", nil, nil, nil, nil, 1);
+				GameTooltip:SetText("Щелкните левой кнопкой мыши для отображения текущего комплекта игрока.", nil, nil, nil, nil, 1);
 			</OnEnter>
 			<OnLeave>
 				GameTooltip:Hide();
@@ -253,7 +253,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="ARTWORK">
-						<FontString name="$parentText" inherits="GameFontHighlightSmall" text="Player Details">
+						<FontString name="$parentText" inherits="GameFontHighlightSmall" text="Информация об игроке">
 							<Anchors>
 								<Anchor point="TOP">
 									<Offset>
@@ -280,7 +280,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="ARTWORK">
-						<FontString name="$parentText" inherits="GameFontHighlightSmall" text="Data">
+						<FontString name="$parentText" inherits="GameFontHighlightSmall" text="Данные">
 							<Anchors>
 								<Anchor point="TOP">
 									<Offset>
@@ -297,7 +297,7 @@
 					</OnLoad>
 				</Scripts>
 			</Frame>
-			<Button name="$parentHeaderPlayerName" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Name">
+			<Button name="$parentHeaderPlayerName" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Имя">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
 						<Offset>
@@ -307,12 +307,14 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
+					    this.title = "Имя";
+					    this.tooltip = "Имя игрока";
 						IOP_UI_SetWidth(100);
 						this.sortType = "playerName";
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="$parentHeaderPlayerLevel" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Lvl">
+			<Button name="$parentHeaderPlayerLevel" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Ур">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentHeaderPlayerName" relativePoint="RIGHT">
 						<Offset>
@@ -322,14 +324,14 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-					    this.title = "Level";
-					    this.tooltip = "Player Level";
+					    this.title = "Уровень";
+					    this.tooltip = "Уровень игрока";
 						IOP_UI_SetWidth(32);
 						this.sortType = "playerLevel";
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="$parentHeaderPlayerClass" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Class">
+			<Button name="$parentHeaderPlayerClass" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Класс">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentHeaderPlayerLevel" relativePoint="RIGHT">
 						<Offset>
@@ -339,14 +341,14 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-					    this.title = "Class";
-					    this.tooltip = "Player Class";
+					    this.title = "Класс";
+					    this.tooltip = "Класс игрока";
 						IOP_UI_SetWidth(78);
 						this.sortType = "playerClass";
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="$parentHeaderLastSeen" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Date Recorded">
+			<Button name="$parentHeaderLastSeen" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Дата записи">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentHeaderPlayerClass" relativePoint="RIGHT">
 						<Offset>
@@ -356,14 +358,14 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						this.title = "Date Recorded";
-						this.tooltip = "Date the score was recorded on";
+						this.title = "Дата записи";
+						this.tooltip = "Дата записи";
 						IOP_UI_SetWidth(123);
 						this.sortType = "recordedTime";
 					</OnLoad>
 				</Scripts>
 			</Button>
-			<Button name="$parentHeaderIOPScore" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Par Score">
+			<Button name="$parentHeaderIOPScore" inherits="InventoryOnParUITableColumnHeaderTemplate" text="Par очки">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentHeaderLastSeen" relativePoint="RIGHT">
 						<Offset>
@@ -373,8 +375,8 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						this.title = "On Par Score";
-						this.tooltip = "This should popup with Score details - not just this text";
+						this.title = "Par очки";
+						this.tooltip = "Отображает количество Par очков игрока";
 						IOP_UI_SetWidth(64);
 						this.sortType = "IOP_Score";
 					</OnLoad>
@@ -647,7 +649,7 @@
 		<Frames>
 			<Frame name="$parentTable" inherits="InventoryOnParUITableTemplate" hidden="false">
 			</Frame>
-			<Button name="$parentButtonClose" inherits="GameMenuButtonTemplate" text="Close">
+			<Button name="$parentButtonClose" inherits="GameMenuButtonTemplate" text="Закрыть">
 				<Size>
 					<AbsDimension x="100" y="30"/>
 				</Size>
@@ -662,7 +664,7 @@
 					<OnClick>IOP_UI_Close();</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parentButtonOptionMenu" inherits="GameMenuButtonTemplate" text="Options">
+			<Button name="$parentButtonOptionMenu" inherits="GameMenuButtonTemplate" text="Настройки">
 				<Size>
 					<AbsDimension x="100" y="30"/>
 				</Size>
@@ -677,7 +679,7 @@
 					<OnClick>IOP_UI_OpenOptionMenu();</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parentButtonCleanUp" inherits="GameMenuButtonTemplate" text="Clean Up">
+			<Button name="$parentButtonCleanUp" inherits="GameMenuButtonTemplate" text="Очистить">
 				<Size>
 					<AbsDimension x="100" y="30"/>
 				</Size>

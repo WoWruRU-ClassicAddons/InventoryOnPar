@@ -4,7 +4,7 @@ IOP_MAX_LEVEL = 60;
 function InventoryOnParOption.InitializeOptions()
 
 	StaticPopupDialogs["InventoryOnPar_DELETE_OUT_OF_DATE_RECORDS"] = {
-		text = TEXT("Do you want to delete all existing records older than one week"),
+		text = TEXT("Вы хотите удалить все существующие записи старше одной недели?"),
 		button1 = TEXT(YES),
 		button2 = TEXT(NO),
 		OnAccept = function()
@@ -15,7 +15,7 @@ function InventoryOnParOption.InitializeOptions()
 	};
 
 	StaticPopupDialogs["InventoryOnPar_DELETE_ALL_RECORDS"] = {
-		text = TEXT("Do you want to delete all existing records"),
+		text = TEXT("Вы хотите удалить все существующие записи?"),
 		button1 = TEXT(YES),
 		button2 = TEXT(NO),
 		OnAccept = function()
@@ -96,7 +96,7 @@ end
 InventoryOnParOption.CheckButtonScanPlayers = {};
 
 function InventoryOnParOption.CheckButtonScanPlayers.OnShow()
-	InventoryOnParOptionCheckButtonScanPlayersLabel:SetText("Scan Other Players");
+	InventoryOnParOptionCheckButtonScanPlayersLabel:SetText("Сканирование других игроков");
 	if(IOP.Options.scanPlayers == 1) then
 		InventoryOnParOptionCheckButtonScanPlayers:SetChecked();
 	end

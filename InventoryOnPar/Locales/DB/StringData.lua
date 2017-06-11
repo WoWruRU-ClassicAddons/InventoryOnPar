@@ -8,7 +8,7 @@
 -- Data block 
 --------------------------------------------------------------------------------------------------
 
-function IOP_LoadStringData()
+function IOP_LoadStringData_Eng()
 
 -- Patch 1.12 items start
 

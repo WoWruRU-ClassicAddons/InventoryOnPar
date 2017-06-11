@@ -96,7 +96,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="OVERLAY">
-						<FontString name="$parentLabel" inherits="GameFontNormal" text="Minimum Level">
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="Минимальный уровень">
 							<Anchors>
 								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
 									<Offset>
@@ -119,7 +119,7 @@
 					</OnShow>
 					<OnEnter>
 						GameTooltip_SetDefaultAnchor(GameTooltip, this)
-						GameTooltip:SetText("Minimum Level to scan", nil, nil, nil, nil, 1);
+						GameTooltip:SetText("Минимальный уровень для сканирования", nil, nil, nil, nil, 1);
 					</OnEnter>
 				</Scripts>
 			</EditBox>
@@ -136,7 +136,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="OVERLAY">
-						<FontString name="$parentLabel" inherits="GameFontNormal" text="Maximum Level">
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="Максимальный уровень">
 							<Anchors>
 								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
 									<Offset>
@@ -159,7 +159,7 @@
 					</OnShow>
 					<OnEnter>
 						GameTooltip_SetDefaultAnchor(GameTooltip, this)
-						GameTooltip:SetText("Maximum Level to scan", nil, nil, nil, nil, 1);
+						GameTooltip:SetText("Максимальный уровень для сканирования", nil, nil, nil, nil, 1);
 					</OnEnter>
 				</Scripts>
 			</EditBox>
@@ -176,7 +176,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="OVERLAY">
-						<FontString name="$parentLabel" inherits="GameFontNormal" text="Date Format">
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="Формат даты">
 							<Anchors>
 								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
 									<Offset>
@@ -196,7 +196,7 @@
 					</OnShow>
 					<OnEnter>
 						GameTooltip_SetDefaultAnchor(GameTooltip, this)
-						GameTooltip:SetText("Set Date Format for display", nil, nil, nil, nil, 1);
+						GameTooltip:SetText("Установка формата даты", nil, nil, nil, nil, 1);
 					</OnEnter>
 				</Scripts>
 			</EditBox>
@@ -210,7 +210,7 @@
 				</Anchors>
 				<Layers>
 					<Layer level="OVERLAY">
-						<FontString name="$parentLabel" inherits="GameFontNormal" text="Minutes between updates">
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="Минут между обновлениями">
 							<Anchors>
 								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
 									<Offset>
@@ -227,7 +227,7 @@
 					</OnShow>
 					<OnEnter>
 						GameTooltip_SetDefaultAnchor(GameTooltip, this)
-						GameTooltip:SetText("Specify the number of minutes to wait between requesting Par information for the same player.", nil, nil, nil, nil, 1);
+						GameTooltip:SetText("Указать количество минуть для ожидания между запрашиваниями Par информации по записанным данным игроков.", nil, nil, nil, nil, 1);
 					</OnEnter>
 					<OnLeave>
 						GameTooltip:Hide();
@@ -248,7 +248,7 @@
 					</OnShow>
 					<OnEnter>
 						GameTooltip_SetDefaultAnchor(GameTooltip, this)
-						GameTooltip:SetText("If checked this will scan other players par score when you target them within inspect range", nil, nil, nil, nil, 1);
+						GameTooltip:SetText("Сканирование других игроков в пределе \"осмотра\"", nil, nil, nil, nil, 1);
 					</OnEnter>
 					<OnLeave>
 						GameTooltip:Hide();

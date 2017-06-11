@@ -37,7 +37,7 @@ end
 
 function IOP_UI_CleanUpData()
 	-- this routine will delete any data older than the retention date.
-	DEFAULT_CHAT_FRAME:AddMessage("\nInventory On Par : The clean up button does nothing at present");
+	DEFAULT_CHAT_FRAME:AddMessage("\nInventory On Par : В настоящее время кнопка \"Очистить\" ничего не делает");
 end
 
 function IOP_UI_Close()
@@ -51,7 +51,7 @@ function IOP_UI_RowClicked(button)
 	local playerName = IOP_UI_tableIndex[lineOffset + rowID];
 	if (button == "RightButton") then
 		-- IOP_DeletePlayerRecord(playerName);
-		DEFAULT_CHAT_FRAME:AddMessage("\nInventory On Par : The delete option is not implemented yet");
+		DEFAULT_CHAT_FRAME:AddMessage("\nInventory On Par : Функция удаления пока не реализована");
 	else
 		IOP_UI_ShowTooltip(playerName);
 	end
@@ -222,7 +222,7 @@ end
 
 function IOP_UI_SetTableTitle()
 	local tableTitle = getglobal("InventoryOnParUIFrameTableTitle");
-	tableTitle:SetText("Inventory On Par Scores for "..GetRealmName());
+	tableTitle:SetText("Par очки c сервера "..GetRealmName());
 end
 
 function IOP_UI_SetTableStatus(status)

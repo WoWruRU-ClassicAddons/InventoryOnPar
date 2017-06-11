@@ -4,7 +4,7 @@
 
 -- ************************** Constants *************************************
 TITAN_INVENTORYONPAR_ID = "InventoryOnPar";
-TITAN_INVENTORYONPAR_TOOLTIP = "InventoryOnPar Tooltip\n";
+TITAN_INVENTORYONPAR_TOOLTIP = "InventoryOnPar\n";
 TITAN_INVENTORYONPAR_MENUTEXT = "Inventory On Par"
 TITAN_INVENTORYONPAR_BUTTON_LABEL = "Par:"
 

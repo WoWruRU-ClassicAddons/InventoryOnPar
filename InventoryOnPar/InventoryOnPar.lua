@@ -99,6 +99,14 @@ v3.55 - added fix for error on 316 when itemRarity is nil, also moved rarity str
 v3.60 - added extra items introduced in patch 1.12 and 1.12.1
 --]]
 
+if GetLocale() == "ruRU" then
+	IOP_LoadNumericData = IOP_LoadNumericData_ruRU;
+	IOP_LoadStringData = IOP_LoadStringData_ruRU;
+else
+	IOP_LoadNumericData = IOP_LoadNumericData_Eng;
+	IOP_LoadStringData = IOP_LoadStringData_Eng;
+end
+
 local INVENTORYONPAR_VERSION = 3.60;
 
 --------------------------------------------------------------------------------------------------
@@ -159,7 +167,7 @@ function InventoryOnPar_Initialise()
 	SLASH_INVENTORYONPAR1 = "/iop";
 
 	if(DEFAULT_CHAT_FRAME) then
-		DEFAULT_CHAT_FRAME:AddMessage("\nPericles's InventoryOnPar AddOn v"..INVENTORYONPAR_VERSION.." loaded");
+		DEFAULT_CHAT_FRAME:AddMessage(AddOn_loaded..INVENTORYONPAR_VERSION..loaded);
 	end
 	InventoryOnParOption.InitializeOptions();
 	IOP_HookTooltips();
@@ -217,7 +225,7 @@ function IOP_RequestTargetScore(unit, override)
 				NotifyInspect(unit);
 				IOP_AddPlayerRecord(IOP.currentTarget);
 				IOP.Data.lastUpdated = time();
-				DEFAULT_CHAT_FRAME:AddMessage("InventoryOnPar captured Par Score of "..format("%.2f", IOP.currentTarget.IOP_Score).." for "..IOP.currentTarget.playerName);
+				DEFAULT_CHAT_FRAME:AddMessage(captured_Par_Score..format("%.2f", IOP.currentTarget.IOP_Score)..Par_Score_For..IOP.currentTarget.playerName);
 			end
 		end
 	end
@@ -300,7 +308,7 @@ function IOP_GetItemLevels(unitName)
 			unitLevel = MAX_LEVEL; -- force level back if players kit is beneath his level which is the MAX_LEVEL
 		end
 	end
-	textstring="|c"..colourWhite.."Inventory Status : (Player Level : "..unitLevel..")\n";
+	textstring="|c"..colourWhite..Status..unitLevel..")\n";
 	iopTwoHanded = "false";
 	for index = 1, getn(INVENTORY_SLOT_LIST), 1 do
 		INVENTORY_SLOT_LIST[index].id = GetInventorySlotInfo(INVENTORY_SLOT_LIST[index].name);
@@ -316,7 +324,7 @@ function IOP_GetItemLevels(unitName)
 			end
 			if (itemCode) then
 				local itemLevel, levelColour = IOP_GetItemLevel(itemCode, unitLevel, itemMinLevel);
-				textstring=textstring.."\n|c"..levelColour..INVENTORY_SLOT_LIST[index].desc.." - |c"..levelColour.." lvl:"..itemLevel.." - "..itemName;
+				textstring=textstring.."\n|c"..levelColour..INVENTORY_SLOT_LIST[index].desc.." - |c"..levelColour..lvl..itemLevel.." - "..itemName;
 				if(ITEM_RARITY[itemRarity].name) then
 					textstring=textstring.."  |c"..ITEM_RARITY[itemRarity].colour.."["..ITEM_RARITY[itemRarity].name.."]";
 				end
@@ -336,10 +344,10 @@ function IOP_GetItemLevels(unitName)
 					textstring=textstring.."  ("..format("%.2f", iopValue)..")";
 				end
 			else
-				textstring=textstring.."\n|c"..colourWhite..INVENTORY_SLOT_LIST[index].desc.." - |c"..colourWhite.." Not Found";
+				textstring=textstring.."\n|c"..colourWhite..INVENTORY_SLOT_LIST[index].desc.." - |c"..colourWhite..Not_Found;
 			end
 		else
-			textstring=textstring.."\n|c"..colourWhite..INVENTORY_SLOT_LIST[index].desc.." - |c"..colourWhite.." Slot Empty";
+			textstring=textstring.."\n|c"..colourWhite..INVENTORY_SLOT_LIST[index].desc.." - |c"..colourWhite..Slot_Empty;
 			if(INVENTORY_SLOT_LIST[index].name == "SecondaryHandSlot" and iopTwoHanded == "true") then
 				-- make no adjustment if using two handed weapon
 				iopValue = 0;
@@ -352,7 +360,7 @@ function IOP_GetItemLevels(unitName)
 			textstring=textstring.."  ("..format("%.2f", iopValue)..")";
 		end
 	end
-	textstring = textstring.."\n\n|c"..colourWhite.."Inventory On Par Score : "..format("%.2f", iopTotal);
+	textstring = textstring.."\n\n|c"..colourWhite..Par_Score..format("%.2f", iopTotal);
 	return textstring, iopTotal;
 end
 
@@ -438,10 +446,10 @@ function IOP_ShowPlayerData()
 	local IOP_ThisRealm = GetRealmName();
 	if(IOP.Data[IOP_ThisRealm] ~= nil) then
 		for index, player in IOP.Data[IOP_ThisRealm] do
-			DEFAULT_CHAT_FRAME:AddMessage(player.playerName.." a lvl "..player.playerLevel.." "..player.class.." on "..date(IOP.Options.dateFormat, player.recordedTime).." had par of : "..player.IOP_Score);
+			DEFAULT_CHAT_FRAME:AddMessage(player.playerName..a_lvl..player.playerLevel.." "..player.class..on..date(IOP.Options.dateFormat, player.recordedTime)..had_par_of..player.IOP_Score..Scores);
 		end
 	else
-		DEFAULT_CHAT_FRAME:AddMessage("No data recorded for "..IOP_ThisRealm.." realm yet.");
+		DEFAULT_CHAT_FRAME:AddMessage(No_data_recorded..IOP_ThisRealm..realm_yet);
 	end
 end
 
@@ -453,13 +461,13 @@ function IOP_ScanMembers(partyType)
 		numberInParty = GetNumRaidMembers();
 	end
 	if (numberInParty==0) then
-		DEFAULT_CHAT_FRAME:AddMessage("[IOP Scan] Error you are not in a "..partyType,1,0,0);
+		DEFAULT_CHAT_FRAME:AddMessage(IOP_Scan..partyType,1,0,0);
 	else
 		for i=1, numberInParty, 1 do
 			if (CheckInteractDistance(partyType..i, 1)) then
 				IOP_RequestTargetScore(partyType..i, 1);
 			else
-				DEFAULT_CHAT_FRAME:AddMessage(UnitName(partyType..i).." is out of inspect range.");
+				DEFAULT_CHAT_FRAME:AddMessage(UnitName(partyType..i)..inspect_range);
 			end
 		end
 	end
@@ -481,7 +489,7 @@ function IOP_ReloadTables()
 	if(not ITEMS_DB["2374"]) then
 		IOP_LoadNumericData();
 	end
-	if(not NAME_ITEMS_DB["Libram of Divinity"]) then
+	if(not NAME_ITEMS_DB[Libram_of_Divinity]) then
 		IOP_LoadStringData();
 	end
 end
@@ -492,7 +500,7 @@ end
 
 function InventoryOnPar_SlashCommandHandler(msg)
 	if(msg == "version") then
-		DEFAULT_CHAT_FRAME:AddMessage("InventoryOnPar Version : "..INVENTORYONPAR_VERSION);
+		DEFAULT_CHAT_FRAME:AddMessage(Version..INVENTORYONPAR_VERSION);
 	elseif(msg == "show") then
 		ShowUIPanel(InventoryOnParUIFrame);
 	elseif(msg == "data") then
@@ -502,19 +510,19 @@ function InventoryOnPar_SlashCommandHandler(msg)
 	elseif(msg == "debug") then
 		IOP_DebugItemIDs();
 	elseif(msg == "raid") then
-		IOP_ScanMembers("raid");
+		IOP_ScanMembers("рейде");
 	elseif(msg == "party") then
-		IOP_ScanMembers("party");
+		IOP_ScanMembers("группе");
 	elseif(msg == "reload") then
 		IOP_ReloadTables();
 	else
-		DEFAULT_CHAT_FRAME:AddMessage("InventoryOnPar Commands");
-		DEFAULT_CHAT_FRAME:AddMessage("/iop version - shows version information");
-		DEFAULT_CHAT_FRAME:AddMessage("/iop show - displays other player data collected");
-		DEFAULT_CHAT_FRAME:AddMessage("/iop data - displays current character data");
-		DEFAULT_CHAT_FRAME:AddMessage("/iop options - displays options setup panel");
-		DEFAULT_CHAT_FRAME:AddMessage("/iop party - scans all party members in inspect range");
-		DEFAULT_CHAT_FRAME:AddMessage("/iop raid - scans all raid members in inspect range");
+		DEFAULT_CHAT_FRAME:AddMessage(Commands);
+		DEFAULT_CHAT_FRAME:AddMessage(iop_version);
+		DEFAULT_CHAT_FRAME:AddMessage(iop_show);
+		DEFAULT_CHAT_FRAME:AddMessage(iop_data);
+		DEFAULT_CHAT_FRAME:AddMessage(iop_options);
+		DEFAULT_CHAT_FRAME:AddMessage(iop_party);
+		DEFAULT_CHAT_FRAME:AddMessage(iop_raid);
 	end
 end
 
@@ -557,11 +565,11 @@ function IOP_GameTooltip_OnShow()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			GameTooltip:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			GameTooltip:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			GameTooltip:Show()
 		end
 	else
-		DEFAULT_CHAT_FRAME:AddMessage("|c00bfffff hmm it is null");
+		DEFAULT_CHAT_FRAME:AddMessage(it_is_null);
 	end
 end
 
@@ -578,7 +586,7 @@ function IOP_ItemRefTooltip_OnShow()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			ItemRefTooltip:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			ItemRefTooltip:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			ItemRefTooltip:Show()
 		end
 	end
@@ -597,7 +605,7 @@ function IOP_LootLinkTooltip_OnShow()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			LootLinkTooltip:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			LootLinkTooltip:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			LootLinkTooltip:Show()
 		end
 	end
@@ -616,7 +624,7 @@ function IOP_ComparisonTooltip1_OnShow()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			ComparisonTooltip1:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			ComparisonTooltip1:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			ComparisonTooltip1:Show()
 		end
 	end
@@ -635,7 +643,7 @@ function IOP_ComparisonTooltip2_OnShow()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			ComparisonTooltip2:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			ComparisonTooltip2:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			ComparisonTooltip2:Show()
 		end
 	end
@@ -654,7 +662,7 @@ function IOP_AtlasLootTooltip_OnShow()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			AtlasLootTooltip:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			AtlasLootTooltip:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			AtlasLootTooltip:Show()
 		end
 	end
@@ -669,11 +677,11 @@ function xIOP_ShowTooltip()
 		local itemLevel, levelColour = IOP_GetItemLevelByName(IOP_tooltip:GetText(), UnitLevel("player"), reqLevel);
 		if (levelColour ~= colourBlue) then
 			-- suppress tooltip line if unknown
-			this:AddLine("|c"..levelColour.."Item Level : "..itemLevel);
+			this:AddLine("|c"..levelColour..IOP_ITEM_LEVEL..itemLevel);
 			this:Show()
 		end
 	else
-		DEFAULT_CHAT_FRAME:AddMessage("|c00bfffff hmm it is null");
+		DEFAULT_CHAT_FRAME:AddMessage(it_is_null);
 	end
 end
 
@@ -736,7 +744,7 @@ function IOP_GetReqLevel(fieldname)
 		if(field and field:IsVisible()) then
 			linetext = field:GetText();
 			if (linetext) then
-				iStart, iEnd, value = string.find(linetext, "Requires Level (%d+)");
+				iStart, iEnd, value = string.find(linetext, Requires_Level);
 				if (value) then
 					return value;
 				end
@@ -749,7 +757,7 @@ end
 function IOP_GetItemLevelByName(itemName, playerLevel, itemMinLevel)
 	if (itemName) then
 		local item = NAME_ITEMS_DB[itemName];
-		local first, last = string.find(itemName, " of ");
+		local first, last = string.find(itemName, ItemRandomProperties);
 		if (not item and first) then
 			local shortName = string.sub(itemName, 1, first - 1);
 			item = NAME_ITEMS_DB[shortName];

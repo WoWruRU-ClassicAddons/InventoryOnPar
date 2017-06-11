@@ -1,6 +1,7 @@
 ## Interface: 11200
 ## Title: InventoryOnPar
 ## Notes: Colour codes Inventory items based on how appropriate item is to your level.
+## Notes-ruRU: Показывает уровень надетых на Вас предметов, считает условные очки.
 ## Author: Pericles
 ## SavedVariables: IOP
 ## OptionalDeps:

@@ -1,5 +1,6 @@
 ## Interface: 11200
 ## Title: Titan Panel [Inventory On Par]
 ## Notes: Shows combined Items On Par "score"
+## Notes-ruRU: Показывает объединенные Par очки предметов на "титан панели"
 ## RequiredDeps: Titan, InventoryOnPar
 TitanInventoryOnPar.xml

@@ -8,10 +8,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<Include file="Locales\DB\NumericData.lua"/>
+	<Include file="Locales\DB\StringData.lua"/>
+	<Include file="Locales\DB_ruRU\NumericData_ruRU.lua"/>
+	<Include file="Locales\DB_ruRU\StringData_ruRU.lua"/>
 	<Script file="InventoryOnPar.lua"/>
-	<Script file="Localization.lua"/>
-	<Script file="NumericData.lua"/>
-	<Script file="StringData.lua"/>
+	<Include file="Locales\localization.lua"/>
 
 	<Frame name="IOP_CPframe" toplevel="true" enableMouse="true" hidden="false" parent="CharacterNameFrame">
 		<Size>
@@ -103,7 +105,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button name="InventoryOnParFrameOkay" inherits="UIPanelButtonTemplate" text="Okay">
+			<Button name="InventoryOnParFrameOkay" inherits="UIPanelButtonTemplate" text="ОК">
 				<Size>
 					<AbsDimension x="90" y="21"/>
 				</Size>
